@@ -1,0 +1,3 @@
+module ConsoleApp {
+    requires ApplicationLibrary;
+}
