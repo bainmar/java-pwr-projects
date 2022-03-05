@@ -1,5 +1,6 @@
 package com.bartoszek.md5library;
 import java.nio.file.Path;
+import java.util.Formatter;
 import java.util.Objects;
 
 public class FileData {
@@ -49,11 +50,11 @@ public class FileData {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("------- File Info ------");
+        builder.append(String.format("%-20s","File info").replace(" ","*"));
         builder.append("\nfilename: " + fileName);
         builder.append("\nhash: " + hash);
-        builder.append("\npath: " +path);
-        builder.append("\n--------- End --------- ");
+        builder.append("\npath: " + path);
+        builder.append(String.format("%n%-20s%n", "End of file info").replace(" ","*"));
         return builder.toString();
     }
 
