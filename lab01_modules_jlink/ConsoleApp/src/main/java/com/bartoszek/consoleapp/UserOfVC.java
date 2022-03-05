@@ -21,33 +21,32 @@ public class UserOfVC {
     public void checkChanges() throws IOException {
         Map<FileStatus, List<FileData>> changesInRepo = versionController.getChangesInRepo();
 
-        System.out.println("-------- Changes --------");
+        System.out.println(String.format("%30s%n","Changes").replace(" ", "*"));
 
         if (!changesInRepo.get(FileStatus.NEW).isEmpty()) {
-            System.out.println("--- new files ---");
+            System.out.println(String.format("%-25s","New files").replace(" ","*"));
             changesInRepo.get(FileStatus.NEW).stream()
                     .forEach(System.out::println);
         }
         if (!changesInRepo.get(FileStatus.EDITED).isEmpty()) {
-            System.out.println("--- edited ---");
+            System.out.println(String.format("%-25s","Edited").replace(" ","*"));
             changesInRepo.get(FileStatus.EDITED).stream()
                     .forEach(System.out::println);
         }
-
         if(!changesInRepo.get(FileStatus.REMOVED).isEmpty()) {
-            System.out.println("--- removed ---");
+            System.out.println(String.format("%-25s","Removed").replace(" ","*"));
             changesInRepo.get(FileStatus.REMOVED).stream()
                     .forEach(System.out::println);
         }
-        System.out.println("------ End of changes ------");
+        System.out.println(String.format("%30s","End of changes").replace(" ","*"));
 
     }
 
     public void showFilesInRepo() {
 
-        System.out.println("-------- Files in Repo --------");
+        System.out.println(String.format("%30s%n","Files in repo").replace(" ","*"));
         versionController.showFilesInRepo();
-        System.out.println("------ End of Files in Repo ------");
+        System.out.println(String.format("%30s","End of files in repo").replace(" ","*"));
 
     }
 
