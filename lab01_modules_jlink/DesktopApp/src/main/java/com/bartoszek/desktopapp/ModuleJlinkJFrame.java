@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 
 public class ModuleJlinkJFrame extends JFrame {
 
+    private JMenuItem authorJMenuItem;
     private Box trackInformationBox;
     private JLabel trackJLabel;
     private JTextField trackJTextField;
@@ -37,6 +38,8 @@ public class ModuleJlinkJFrame extends JFrame {
         //north panel
         trackInformationBox = getTrackJPanel();
         getContentPane().add(trackInformationBox, BorderLayout.NORTH);
+        jFileChooser=new JFileChooser();
+        jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         //center panel
         changesInformationJPanel=getChangesJPanel();
@@ -50,6 +53,39 @@ public class ModuleJlinkJFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(600,400));
         setLocationRelativeTo(null);
+    }
+
+
+    public JMenuItem getAuthorJMenuItem() {
+        return authorJMenuItem;
+    }
+
+    public JTextField getTrackJTextField() {
+        return trackJTextField;
+    }
+
+    public JButton getTrackJButton() {
+        return trackJButton;
+    }
+
+    public JFileChooser getjFileChooser() {
+        return jFileChooser;
+    }
+
+    public JTextArea getNewJTextArea() {
+        return newJTextArea;
+    }
+
+    public JTextArea getModifiedJTextArea() {
+        return modifiedJTextArea;
+    }
+
+    public JTextArea getRemovedJTextArea() {
+        return removedJTextArea;
+    }
+
+    public JButton getChangesJButton() {
+        return changesJButton;
     }
 
     private void changeContentPanelToJPanel() {
@@ -66,7 +102,7 @@ public class ModuleJlinkJFrame extends JFrame {
         jMenuBar.add(infoJMenu);
 
         //items
-        JMenuItem authorJMenuItem = new JMenuItem("autor");
+        authorJMenuItem = new JMenuItem("autor");
         authorJMenuItem.setMnemonic(KeyEvent.VK_A);
         authorJMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
         //adding options
@@ -92,6 +128,7 @@ public class ModuleJlinkJFrame extends JFrame {
         newJPanel=new JPanel(new BorderLayout());
         newJPanel.setBorder(BorderFactory.createTitledBorder("nowe"));
         newJTextArea=new JTextArea();
+        newJTextArea.setForeground(Color.BLACK);
         newJPanel.add(newJTextArea);
 
         modifiedJPanel = new JPanel(new BorderLayout());
@@ -123,17 +160,10 @@ public class ModuleJlinkJFrame extends JFrame {
         trackBox.add(Box.createHorizontalStrut(10));
         trackBox.add(trackJTextField);
         trackBox.add(trackJButton);
-//        jFileChooser=new JFileChooser();
-//        jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-//        trackJButton.addActionListener(e->{
-//            int returnValue = jFileChooser.showOpenDialog(this);
-//            if(returnValue==JFileChooser.APPROVE_OPTION){
-//                File selectedFile = jFileChooser.getSelectedFile();
-//            }
-//
-//        });
         return trackBox;
     }
+
+
 
 
 }
