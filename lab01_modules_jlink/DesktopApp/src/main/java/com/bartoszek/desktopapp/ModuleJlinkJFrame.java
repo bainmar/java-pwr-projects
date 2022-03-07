@@ -2,7 +2,6 @@ package com.bartoszek.desktopapp;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 public class ModuleJlinkJFrame extends JFrame {
@@ -12,7 +11,6 @@ public class ModuleJlinkJFrame extends JFrame {
     private JLabel trackJLabel;
     private JTextField trackJTextField;
     private JButton trackJButton;
-    private JFileChooser jFileChooser;
     private JPanel changesInformationJPanel;
     private JPanel newJPanel;
     private JPanel modifiedJPanel;
@@ -38,8 +36,6 @@ public class ModuleJlinkJFrame extends JFrame {
         //north panel
         trackInformationBox = getTrackJPanel();
         getContentPane().add(trackInformationBox, BorderLayout.NORTH);
-        jFileChooser=new JFileChooser();
-        jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         //center panel
         changesInformationJPanel=getChangesJPanel();
@@ -66,10 +62,6 @@ public class ModuleJlinkJFrame extends JFrame {
 
     public JButton getTrackJButton() {
         return trackJButton;
-    }
-
-    public JFileChooser getjFileChooser() {
-        return jFileChooser;
     }
 
     public JTextArea getNewJTextArea() {
@@ -101,11 +93,7 @@ public class ModuleJlinkJFrame extends JFrame {
         infoJMenu.setMnemonic(KeyEvent.VK_I);
         jMenuBar.add(infoJMenu);
 
-        //items
         authorJMenuItem = new JMenuItem("autor");
-        authorJMenuItem.setMnemonic(KeyEvent.VK_A);
-        authorJMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
-        //adding options
         infoJMenu.add(authorJMenuItem);
         return jMenuBar;
     }

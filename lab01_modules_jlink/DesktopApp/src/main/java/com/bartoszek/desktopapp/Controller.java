@@ -5,6 +5,8 @@ import com.bartoszek.md5library.FileStatus;
 import com.bartoszek.md5library.VersionController;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -27,6 +29,12 @@ public class Controller {
     }
 
     public void initController() {
+        //menu set key shortcut
+        JMenuItem authorJMenuItem = view.getAuthorJMenuItem();
+        authorJMenuItem.setMnemonic(KeyEvent.VK_A);
+        authorJMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+
+        model.getjFileChooser().setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         view.getTrackJButton().addActionListener(e -> setPathToTrack());
         view.getAuthorJMenuItem().addActionListener(e -> setAuthorListener());
         view.getChangesJButton().addActionListener(e -> setChangesButtonListener());
@@ -74,7 +82,7 @@ public class Controller {
 
     private void setPathToTrack() {
 
-        JFileChooser jFileChooser = view.getjFileChooser();
+        JFileChooser jFileChooser = model.getjFileChooser();
         int returnValue = jFileChooser.showOpenDialog(view);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = jFileChooser.getSelectedFile();
