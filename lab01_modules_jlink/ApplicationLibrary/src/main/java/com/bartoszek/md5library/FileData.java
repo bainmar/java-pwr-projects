@@ -1,6 +1,5 @@
 package com.bartoszek.md5library;
 import java.nio.file.Path;
-import java.util.Formatter;
 import java.util.Objects;
 
 public class FileData {

@@ -11,6 +11,7 @@
     <modules>
         <module>ApplicationLibrary</module>
         <module>ConsoleApp</module>
+        <module>DesktopApp</module>
     </modules>
 
     <properties>
