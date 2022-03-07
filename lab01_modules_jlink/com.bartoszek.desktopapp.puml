@@ -1,0 +1,53 @@
+@startuml
+class com.bartoszek.desktopapp.Model {
+- VersionController versionController
+- JFileChooser jFileChooser
++ void createVersionController(Path)
++ VersionController getVersionController()
++ JFileChooser getjFileChooser()
+}
+class com.bartoszek.desktopapp.ModuleJlinkJFrame {
+- JMenuItem authorJMenuItem
+- Box trackInformationBox
+- JLabel trackJLabel
+- JTextField trackJTextField
+- JButton trackJButton
+- JPanel changesInformationJPanel
+- JPanel newJPanel
+- JPanel modifiedJPanel
+- JPanel removedJPanel
+- JTextArea newJTextArea
+- JTextArea modifiedJTextArea
+- JTextArea removedJTextArea
+- JPanel southJPanel
+- JButton changesJButton
+- void initFrame()
++ JMenuItem getAuthorJMenuItem()
++ JTextField getTrackJTextField()
++ JButton getTrackJButton()
++ JTextArea getNewJTextArea()
++ JTextArea getModifiedJTextArea()
++ JTextArea getRemovedJTextArea()
++ JButton getChangesJButton()
+- void changeContentPanelToJPanel()
+- JMenuBar createJMenuBar()
+- JPanel getSouthJPanel()
+- JPanel getChangesJPanel()
+- Box getTrackJPanel()
+}
+class com.bartoszek.desktopapp.Controller {
+- Model model
+- ModuleJlinkJFrame view
+- void initView()
++ void initController()
+- void setChangesButtonListener()
+- void setPathToTrack()
+- void setAuthorListener()
+}
+class com.bartoszek.desktopapp.SystemTest {
++ {static} void main(String[])
+}
+
+
+com.bartoszek.desktopapp.JFrame <|-- com.bartoszek.desktopapp.ModuleJlinkJFrame
+@enduml

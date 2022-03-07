@@ -3,7 +3,7 @@
 - [Autor](#autor)
 - [Kurs](#kurs)
 - [Zadania do wykonania](#zadania-do-wykonania)
-	- [Lab01 (modules, jlink)](#lab01-modules-jlink)
+  - [Lab01 (modules, jlink)](#lab01-modules-jlink)
 
 ## Autor
 
@@ -34,3 +34,5 @@ założenia:
 - do operacji na plikach wykorzystać pakiet java.nio
 - program w stylu funkcjonalnym
 - dodać menadzer bezpieczeństwa i skorzystać z pliku polityki
+
+[informacje o wykonany zadaniu (readme.md)](lab01_modules_jlink/readme.md)

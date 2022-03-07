@@ -1,0 +1,44 @@
+@startuml
+class com.bartoszek.md5library.PathContentPair {
+- String path
+- String content
++ String getPath()
++ String getContent()
+}
+class com.bartoszek.md5library.FileStructureCreator {
+- {static} ArrayList<PathContentPair> fileStructure
+- {static} Path rootPath
++ {static} void createFileStructure()
+- {static} void addFile(PathContentPair)
++ {static} void deleteFileStructure()
++ {static} FileVisitor<Path> getFileVisitor()
+}
+class com.bartoszek.md5library.dirVisitor {
++ FileVisitResult visitFile(Path,BasicFileAttributes)
++ FileVisitResult postVisitDirectory(Path,IOException)
+}
+class com.bartoszek.md5library.UtilsSpec {
+- Path pathOfFileOneTxt
+- Path pathOfFileTwoTxt
+~ {static} void shouldCreateFolderStructure()
+~ void comparingSnapshotOfTheSameFileShouldReturnTrue()
+~ void comparingSnapshotOfDifferentFilesShouldReturnFalse()
+~ {static} void shouldDeleteFolderStructure()
+}
+class com.bartoszek.md5library.VersionControllerSpec {
+- VersionController versionController
+- Path testFileOne
+- Path testFileTwo
+- Path pathToTrack
+~ void shouldCreateFolderStructure()
+~ void numberOfFilesInSnapshotShouldEqualFiveAfterVersionControllerIsCreated()
+~ void numberOfFilesWithStatusNO_CHANGESEqualFiveIfThereWasNoChanges()
+~ void numberOfFilesWithStatusEditedShouldEqualTwoIfTwoFilesWereEdited()
+~ void numberOfFilesWithStatusNEWShouldEqualOneIfOneFileIsAddedToRepo()
+~ void numberOfRemovedFilesAfterRemovingTwoFileFromFileStructureEqualTwo()
+~ void shouldDeleteFolderStructure()
+}
+
+
+com.bartoszek.md5library.SimpleFileVisitor <|-- com.bartoszek.md5library.dirVisitor
+@enduml

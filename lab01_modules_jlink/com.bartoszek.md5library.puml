@@ -1,0 +1,26 @@
+@startuml
+class com.bartoszek.md5library.FileData {
+- String hash
+- String fileName
+- Path path
++ String getFileName()
++ String getHash()
++ Path getPath()
++ int hashCode()
++ boolean equals(Object)
++ String toString()
+}
+class com.bartoszek.md5library.VersionController {
+- Path path
+- Set<FileData> lastSnapshot
++ void changePathToTrack(Path)
++ int getNumberOfTrackedFiles()
++ void showFilesInRepo()
+- Set<FileData> makeSnapshot()
++ Map<FileStatus,List<FileData>> getChangesInRepo()
+}
+class com.bartoszek.md5library.Utils {
+- {static} String ByteArrayToHexString(byte[])
++ {static} String createMD5Hash(Path)
+}
+@enduml

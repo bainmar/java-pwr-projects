@@ -1,0 +1,12 @@
+@startuml
+class com.bartoszek.consoleapp.SystemTest {
++ {static} void main(String[])
++ {static} int menuData(Scanner)
+}
+class com.bartoszek.consoleapp.UserOfVC {
+- VersionController versionController
++ void checkChanges()
++ void showFilesInRepo()
++ void changePathToTrack(Path)
+}
+@enduml
