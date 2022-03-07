@@ -23,9 +23,6 @@ public class Controller {
 
     private void initView() {
         view.getTrackJTextField().setEnabled(false);
-//        view.getNewJTextArea().setEnabled(false);
-//        view.getModifiedJTextArea().setEnabled(false);
-//        view.getRemovedJTextArea().setEnabled(false);
         view.getChangesJButton().setEnabled(false);
     }
 
@@ -89,7 +86,10 @@ public class Controller {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
+        }else if(returnValue==JFileChooser.CANCEL_OPTION){
+            JOptionPane.showMessageDialog(view,"nie zaznaczono folderu do śledzenia","Brak ścieżki",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
             view.getChangesJButton().setEnabled(false);
             JOptionPane.showMessageDialog(view, "niepoprawna ścieżka", "Błąd", JOptionPane.ERROR_MESSAGE);
         }

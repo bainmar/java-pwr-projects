@@ -51,7 +51,7 @@ public class ModuleJlinkJFrame extends JFrame {
 
         //frame properties
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(600,400));
+        setMinimumSize(new Dimension(800,400));
         setLocationRelativeTo(null);
     }
 
@@ -128,18 +128,26 @@ public class ModuleJlinkJFrame extends JFrame {
         newJPanel=new JPanel(new BorderLayout());
         newJPanel.setBorder(BorderFactory.createTitledBorder("nowe"));
         newJTextArea=new JTextArea();
-        newJTextArea.setForeground(Color.BLACK);
-        newJPanel.add(newJTextArea);
+        JScrollPane newJScrollPane = new JScrollPane(newJTextArea,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        newJPanel.add(newJScrollPane);
 
         modifiedJPanel = new JPanel(new BorderLayout());
         modifiedJPanel.setBorder(BorderFactory.createTitledBorder("edytowane"));
         modifiedJTextArea= new JTextArea();
-        modifiedJPanel.add(modifiedJTextArea);
+        JScrollPane modifiedJScrollPane = new JScrollPane(modifiedJTextArea,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS
+                );
+        modifiedJPanel.add(modifiedJScrollPane);
 
         removedJPanel= new JPanel(new BorderLayout());
         removedJPanel.setBorder(BorderFactory.createTitledBorder("usunięte"));
         removedJTextArea=new JTextArea();
-        removedJPanel.add(removedJTextArea);
+        JScrollPane removedJScrollPane = new JScrollPane(removedJTextArea,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
+                ,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        removedJPanel.add(removedJScrollPane);
 
         changesJPanel.add(newJPanel);
         changesJPanel.add(modifiedJPanel);
