@@ -35,4 +35,4 @@ założenia:
 - program w stylu funkcjonalnym
 - dodać menadzer bezpieczeństwa i skorzystać z pliku polityki
 
-[informacje o wykonany zadaniu (readme.md)](lab01_modules_jlink/readme.md)
+[szczegółowa dokumentacja wykonanego zadania (readme.md)](lab01_modules_jlink/readme.md)
