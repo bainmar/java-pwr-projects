@@ -10,6 +10,7 @@
     - [2.1.1. Moduł ApplicationLibrary](#211-moduł-applicationlibrary)
     - [2.1.2. Moduł ConsoleApp](#212-moduł-consoleapp)
     - [2.1.3. Moduł DesktopApp](#213-moduł-desktopapp)
+  - [2.2. IntelliJ](#22-intellij)
 - [3. Uruchomienie](#3-uruchomienie)
   - [3.1. konsola](#31-konsola)
     - [3.1.1. ConsoleApp](#311-consoleapp)
@@ -38,7 +39,7 @@
 
 ## 2. Generowanie modularnych plików jar
 
-Do implementacji zadania utworzono projekt mavenowy w celu uniknięcia ręcznego procesu kompilacji klas oraz tworzenia modularnych plików jar. Projekt składa się z trzech modułów (```ApplicationLibrary, ConsoleApp, DesktoApp```), które są dziećmi modułu ```ModulesAndJlink```. ```ConsoleApp``` oraz ```DesktopApp``` zależą od ```ApplicationLibrary```. Maven automatycznie tworzy pliki skompilowane pliki klas w lokalizacji ```target/``` przy użyciu odpowiedniej komendy mavena dla każdego modułu. W tym przetestuję różne możliwości kompilowania kodu źródłowego i tworzenia na ich podstawie modularnych plików jar.
+Do implementacji zadania utworzono projekt maven'owy w celu uniknięcia ręcznego procesu kompilacji klas oraz tworzenia modularnych plików jar. Projekt składa się z trzech modułów (```ApplicationLibrary, ConsoleApp, DesktoApp```), które są dziećmi modułu ```ModulesAndJlink```. ```ConsoleApp``` oraz ```DesktopApp``` zależą od ```ApplicationLibrary```. Maven automatycznie tworzy pliki skompilowane pliki klas w lokalizacji ```target/``` przy użyciu odpowiedniej komendy mavena dla każdego modułu. W tym przetestuję różne możliwości kompilowania kodu źródłowego i tworzenia na ich podstawie modularnych plików jar.
 
 - za pomocą konsoli
 - przy użyciu IntelliJ
@@ -114,6 +115,26 @@ jar --create --file target_console/lib/bartoszek-desktop-app-1.0.0.jar --main-cl
 ```
 
 ![](img/readme/2022-03-07-22-00-42.png)
+
+### 2.2. IntelliJ
+
+Tworzenie modularnych plików w IntelliJ jest wykonywane za pomocą gui.
+
+Postępowano zgodnie z dokumentacją na stronie <https://www.jetbrains.com/help/idea/compiling-applications.html#package_into_jar>. Dodatkowo istnieje możliwość utworzenia skryptu uruchomiającego moduły ```DesktoApp``` lub ```ConsoleApp``` w **"run configurations"** (automatycznie dodaje moduł ApplicationLibrary do --module-path).
+
+Struktura folderów w głównym folderze projektu ```lab01_modules_jlink``` po wykonaniu instrukcji z dokumentacji.
+
+![](img/readme/2022-03-08-13-28-11.png)
+
+Aplikację można uruchomić w następujący sposób.
+
+```bash
+marcin:~/java-pwr-projects/lab01_modules_jlink(main)$ java --module-path out/artifacts/ApplicationLibrary_jar:out/artifacts/DesktopApp_jar --module DesktopApp/com.bartoszek.desktopapp.SystemTest
+```
+
+Intellij nie używa narzędzia jar do generowania plików jar. Dlatego w pliku ```module-info.class``` brakuje atrybutu ```ModuleMainClass```. Problem przedstawiono w wątku <https://stackoverflow.com/questions/59117333/how-can-i-set-the-modulemainclass-attribute-of-a-jpms-module-using-gradle>
+
+Więcej przykładów dotyczących uruchomienia znajduje się w punkcie *Uruchomienie*.
 
 ## 3. Uruchomienie
 
