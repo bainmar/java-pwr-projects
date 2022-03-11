@@ -11,6 +11,7 @@
     - [2.1.2. Moduł ConsoleApp](#212-moduł-consoleapp)
     - [2.1.3. Moduł DesktopApp](#213-moduł-desktopapp)
   - [2.2. IntelliJ](#22-intellij)
+  - [2.3. Maven](#23-maven)
 - [3. Uruchomienie](#3-uruchomienie)
   - [3.1. konsola](#31-konsola)
     - [3.1.1. ConsoleApp](#311-consoleapp)
@@ -135,6 +136,42 @@ marcin:~/java-pwr-projects/lab01_modules_jlink(main)$ java --module-path out/art
 Intellij nie używa narzędzia jar do generowania plików jar. Dlatego w pliku ```module-info.class``` brakuje atrybutu ```ModuleMainClass```. Problem przedstawiono w wątku <https://stackoverflow.com/questions/59117333/how-can-i-set-the-modulemainclass-attribute-of-a-jpms-module-using-gradle>
 
 Więcej przykładów dotyczących uruchomienia znajduje się w punkcie *Uruchomienie*.
+
+### 2.3. Maven
+
+Projekt składa się z 4 modułów maven'owych (rodzic, 3 dzieci). Każdy z nich jest modularny (zawiera module.info). Aby było możliwe skompilowania modułów, które zależą od innych modułów w projekcie, użyto ```maven-compiler-plugin``` w wersji ``3.10.0``. Moduł ```ApplicationLibrary``` zawiera testy jednostkowe. Napisane testy jednostkowe kończą się końcówką "Spec". Aby umożliwić maven'owi ich uruchomienie, w "parent pom.xml" skonfigurowano plugin ```maven-surefire-plugin```.
+
+```pom
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <includes>**/*Spec.java</includes>
+                    </configuration>
+                    <version>2.22.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+```
+
+Pakiety w module ```ApplicationLibrary``` nie są otwarte. Dlatego w pliku ```pom.xml``` tego modułu skonfigurowano plugin ```maven-surefire-plugin```. Konfiguracja umożliwia otwarcie pakietów w *runtime*.
+
+```pom
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>--add-opens ApplicationLibrary/com.bartoszek.md5library=ALL-UNNAMED</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+```
+
+Po skonfigurowaniu plików ```pom.xml``` projekt uruchomiono komendą ```mvn install```. Komenda pozwala zyskać artefakty projektu i zainstalować je w lokalnym repozytorium mavena.
 
 ## 3. Uruchomienie
 
