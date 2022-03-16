@@ -18,6 +18,8 @@
     - [3.1.2. ConsoleApp-jlink](#312-consoleapp-jlink)
     - [3.1.3. DesktopApp](#313-desktopapp)
     - [3.1.4. DesktopApp-jlink](#314-desktopapp-jlink)
+  - [3.2. konsola z SecurityManager](#32-konsola-z-securitymanager)
+    - [3.2.1. DesktopApp](#321-desktopapp)
 - [4. Przypadek użycia (dodawanie, modyfikacja usuwanie)](#4-przypadek-użycia-dodawanie-modyfikacja-usuwanie)
 
 ## 1. Diagramy klas w poszczególnych pakietach
@@ -275,6 +277,22 @@ lub
 ```bash
 marcin:~/java-pwr-projects/lab01_modules_jlink(main)$ desktop_app_custom_runtime/bin/desktopapp 
 ```
+
+### 3.2. konsola z SecurityManager
+
+W rozdziale przedstawiono użycie SecurityManagera wraz z plikiem polityki przy użyciu konsoli.
+
+#### 3.2.1. DesktopApp
+
+Po wykonaniu poleceń mavena ```mvn clean install``` z głównego folderu projektu ```lab01_modules_jlink```, w konsoli użyto polecenia ```java``` z następującymi argumentami.
+
+```bash
+java -Djava.security.manager -Djava.security.policy=DesktopApp/src/main/resources/java.policy --module-path ApplicationLibrary/target/classes/:DesktopApp/target/classes/ --module DesktopApp/com.bartoszek.desktopapp.SystemTest
+```
+
+```-Djava.security.manager``` informuje o użyciu SecurityManagera. Plik polityki wskazywany jest za pomocą opcji ```-Djava.security.policy```.
+
+Użyty plik polityki zezwala na wszystkie uprawnienia, jednak w projekcie wystarczą uprawnenia czytania i pisania dla komponentu ```JFileChooser```.
 
 ## 4. Przypadek użycia (dodawanie, modyfikacja usuwanie)
 
