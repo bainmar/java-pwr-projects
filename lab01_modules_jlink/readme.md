@@ -11,12 +11,15 @@
     - [2.1.2. Moduł ConsoleApp](#212-moduł-consoleapp)
     - [2.1.3. Moduł DesktopApp](#213-moduł-desktopapp)
   - [2.2. IntelliJ](#22-intellij)
+  - [2.3. Maven](#23-maven)
 - [3. Uruchomienie](#3-uruchomienie)
   - [3.1. konsola](#31-konsola)
     - [3.1.1. ConsoleApp](#311-consoleapp)
     - [3.1.2. ConsoleApp-jlink](#312-consoleapp-jlink)
     - [3.1.3. DesktopApp](#313-desktopapp)
     - [3.1.4. DesktopApp-jlink](#314-desktopapp-jlink)
+  - [3.2. konsola z SecurityManager](#32-konsola-z-securitymanager)
+    - [3.2.1. DesktopApp](#321-desktopapp)
 - [4. Przypadek użycia (dodawanie, modyfikacja usuwanie)](#4-przypadek-użycia-dodawanie-modyfikacja-usuwanie)
 
 ## 1. Diagramy klas w poszczególnych pakietach
@@ -136,6 +139,42 @@ Intellij nie używa narzędzia jar do generowania plików jar. Dlatego w pliku `
 
 Więcej przykładów dotyczących uruchomienia znajduje się w punkcie *Uruchomienie*.
 
+### 2.3. Maven
+
+Projekt składa się z 4 modułów maven'owych (rodzic, 3 dzieci). Każdy z nich jest modularny (zawiera module.info). Aby było możliwe skompilowania modułów, które zależą od innych modułów w projekcie, użyto ```maven-compiler-plugin``` w wersji ``3.10.0``. Moduł ```ApplicationLibrary``` zawiera testy jednostkowe. Napisane testy jednostkowe kończą się końcówką "Spec". Aby umożliwić maven'owi ich uruchomienie, w "parent pom.xml" skonfigurowano plugin ```maven-surefire-plugin```.
+
+```pom
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <includes>**/*Spec.java</includes>
+                    </configuration>
+                    <version>2.22.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+```
+
+Pakiety w module ```ApplicationLibrary``` nie są otwarte. Dlatego w pliku ```pom.xml``` tego modułu skonfigurowano plugin ```maven-surefire-plugin```. Konfiguracja umożliwia otwarcie pakietów w *runtime*.
+
+```pom
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>--add-opens ApplicationLibrary/com.bartoszek.md5library=ALL-UNNAMED</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+```
+
+Po skonfigurowaniu plików ```pom.xml``` projekt uruchomiono komendą ```mvn install```. Komenda pozwala zyskać artefakty projektu i zainstalować je w lokalnym repozytorium mavena.
+
 ## 3. Uruchomienie
 
 Przedstawiono sposoby uruchomienia aplikacji za pomocą konsoli, mavena oraz programu IntelliJ.
@@ -238,6 +277,22 @@ lub
 ```bash
 marcin:~/java-pwr-projects/lab01_modules_jlink(main)$ desktop_app_custom_runtime/bin/desktopapp 
 ```
+
+### 3.2. konsola z SecurityManager
+
+W rozdziale przedstawiono użycie SecurityManagera wraz z plikiem polityki przy użyciu konsoli.
+
+#### 3.2.1. DesktopApp
+
+Po wykonaniu poleceń mavena ```mvn clean install``` z głównego folderu projektu ```lab01_modules_jlink```, w konsoli użyto polecenia ```java``` z następującymi argumentami.
+
+```bash
+java -Djava.security.manager -Djava.security.policy=DesktopApp/src/main/resources/java.policy --module-path ApplicationLibrary/target/classes/:DesktopApp/target/classes/ --module DesktopApp/com.bartoszek.desktopapp.SystemTest
+```
+
+```-Djava.security.manager``` informuje o użyciu SecurityManagera. Plik polityki wskazywany jest za pomocą opcji ```-Djava.security.policy```.
+
+Użyty plik polityki zezwala na wszystkie uprawnienia, jednak w projekcie wystarczą uprawnenia czytania i pisania dla komponentu ```JFileChooser```.
 
 ## 4. Przypadek użycia (dodawanie, modyfikacja usuwanie)
 
