@@ -20,6 +20,8 @@
     - [3.1.4. DesktopApp-jlink](#314-desktopapp-jlink)
   - [3.2. konsola z SecurityManager](#32-konsola-z-securitymanager)
     - [3.2.1. DesktopApp](#321-desktopapp)
+  - [3.3. konsola - fat jar](#33-konsola---fat-jar)
+    - [3.3.1. DesktopApp](#331-desktopapp)
 - [4. Przypadek użycia (dodawanie, modyfikacja usuwanie)](#4-przypadek-użycia-dodawanie-modyfikacja-usuwanie)
 
 ## 1. Diagramy klas w poszczególnych pakietach
@@ -293,6 +295,19 @@ java -Djava.security.manager -Djava.security.policy=DesktopApp/src/main/resource
 ```-Djava.security.manager``` informuje o użyciu SecurityManagera. Plik polityki wskazywany jest za pomocą opcji ```-Djava.security.policy```.
 
 Użyty plik polityki zezwala na wszystkie uprawnienia, jednak w projekcie wystarczą uprawnenia czytania i pisania dla komponentu ```JFileChooser```.
+
+### 3.3. konsola - fat jar
+
+Uruchomienie programu przy użyciu pliku "fat jar", który zawiera zależności.
+
+#### 3.3.1. DesktopApp
+
+Po zbudowaniu projektu za pomocą polecenia ```mvn install``` w folderze ```${root}/DesktopApp/target```
+zostaje stworzony plik ```DesktopApp-1.0-SNAPSHOT-jar-with-dependencies.jar```. Aby uruchomić program należy w konsoli wpisać
+
+```bash
+java -jar DesktopApp-1.0-SNAPSHOT-jar-with-dependencies.jar
+```
 
 ## 4. Przypadek użycia (dodawanie, modyfikacja usuwanie)
 
