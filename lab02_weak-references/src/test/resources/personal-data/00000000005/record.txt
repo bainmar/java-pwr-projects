@@ -1,0 +1,5 @@
+pesel 00000000005
+imie Berry
+nazwisko Flash
+wiek 25
+
