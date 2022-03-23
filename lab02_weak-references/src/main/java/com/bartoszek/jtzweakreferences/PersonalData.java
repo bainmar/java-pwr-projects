@@ -8,8 +8,8 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class PersonalData {
-    List<String> recordTxtLines;
-    BufferedImage imagePng;
+    private List<String> recordTxtLines;
+    private BufferedImage imagePng;
 
     public PersonalData(List<String> recordTxtLines,BufferedImage imagePng){
         this.recordTxtLines=recordTxtLines;

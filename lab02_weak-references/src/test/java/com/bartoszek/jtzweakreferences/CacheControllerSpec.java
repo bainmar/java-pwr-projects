@@ -28,7 +28,7 @@ public class CacheControllerSpec {
 
     @BeforeEach
     void init() throws IOException {
-        cacheController= new CacheController();
+        cacheController= new CacheController(new CacheAppView("weak references"),new Cache());
         cacheController.saveFolder(folderOnePath);
     }
     @Test
@@ -66,16 +66,9 @@ public class CacheControllerSpec {
 
     @Test
     void cacheControllerShouldDisplayCachedPaths() throws IOException {
-
         cacheController.saveFolder(folderOnePath);
         cacheController.saveFolder(folderTwoPath);
         List<String> cachedPaths = cacheController.getCachedPaths();
         cachedPaths.stream().forEach(System.out::println);
     }
-
-
-
-
-
-
 }
