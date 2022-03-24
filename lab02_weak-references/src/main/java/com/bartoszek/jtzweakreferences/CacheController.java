@@ -21,16 +21,18 @@ public class CacheController {
     private LinkedHashSet<Path> bufferedPaths = new LinkedHashSet<>();
     private CacheAppView cacheAppView;
     private JFileChooser jFileChooser;
+    private Viewer personDataViewer;
 
-    public CacheController(CacheAppView cacheAppView, Cache cache) {
+    public CacheController(CacheAppView cacheAppView, Cache cache){
         this.cacheAppView = cacheAppView;
         this.cache = cache;
         this.jFileChooser = new JFileChooser();
+        this.personDataViewer = new PersonDataViewer();
         initView();
     }
 
     private void initView() {
-
+        cacheAppView.getPersonalDataJTextArea().setFont(personDataViewer.getFont());
     }
 
     public void initController() {
@@ -38,18 +40,16 @@ public class CacheController {
         JMenuItem authorJMenuItem = cacheAppView.getAuthorJMenuItem();
         authorJMenuItem.setMnemonic(KeyEvent.VK_A);
         authorJMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+        //add author information
+        authorJMenuItem.addActionListener(e -> setAuthorListener());
 
-        //
+        //configure JFileChooser
         configureJFileChooser();
-
-        //author information
-        cacheAppView.getAuthorJMenuItem().addActionListener(e -> setAuthorListener());
-
     }
 
     private void configureJFileChooser() {
         cacheAppView.getFolderToChooseJPanel().add(jFileChooser);
-        cacheAppView.getFolderToChooseJPanel().setPreferredSize(new Dimension(300,300));
+        cacheAppView.getFolderToChooseJPanel().setPreferredSize(new Dimension(200,200));
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         jFileChooser.addActionListener(new ActionListener() {
             @Override
@@ -58,15 +58,23 @@ public class CacheController {
                     File selectedFile = jFileChooser.getSelectedFile();
                     try {
                         Path folderPath = selectedFile.toPath();
-                        boolean folderSaved = saveFolder(folderPath);
-                        if(folderSaved){
+                        addLastViewedPath(folderPath);
+                        if(containsPersonalDataEntry(folderPath)){
+                            PersonalData cachedEntry = cache.getEntry(folderPath);
                             updateCachedFilesJTextArea();
-                            if(cache.containsPersonalDataEntry(folderPath)){
-                                PersonalData entry = cache.getEntry(folderPath);
-                                updatePanelWithPersonalData(entry);
+                            updatePanelWithPersonalData(cachedEntry);
+                        }else{
+                            boolean folderSaved = saveFolder(folderPath);
+                            if(folderSaved){
+                                if(containsPersonalDataEntry(folderPath)){
+                                    PersonalData entry = cache.getEntry(folderPath);
+                                    updatePanelWithPersonalData(entry);
+                                    updateCachedFilesJTextArea();
+                                }
                             }
                         }
-
+                        // to visualize how work WeakHashMap, i run garbage collector
+                        System.gc();
                     } catch (IOException ioException) {
                         JOptionPane.showMessageDialog(cacheAppView,"błąd wcztywania"
                                 ,"Error IO"
@@ -88,10 +96,11 @@ public class CacheController {
             stringBuilder.append(e);
             stringBuilder.append("\n");
         }
-        cacheAppView.getPersonalDatJTextArea().setText(stringBuilder.toString());
+        cacheAppView.getPersonalDataJTextArea().setText(stringBuilder.toString());
 
+        Dimension imageSize = personDataViewer.getImageSize();
         cacheAppView.getPersonalDataJLabel()
-                .setIcon(new ImageIcon(Scalr.resize(bufferedImage, Scalr.Method.BALANCED, 200, 200)));
+                .setIcon(new ImageIcon(Scalr.resize(bufferedImage, Scalr.Method.BALANCED, imageSize.width, imageSize.height)));
     }
 
 
@@ -112,13 +121,8 @@ public class CacheController {
     }
 
     public boolean saveFolder(Path folderPath) throws IOException {
-
         PersonalData entry = PersonalData.createEntry(folderPath);
         if(entry!=null){
-            bufferedPaths.add(folderPath);
-            if(bufferedPaths.size()>3){
-                bufferedPaths.remove(bufferedPaths.stream().findFirst().get());
-            }
             cache.saveFolder(folderPath,entry);
             return true;
         }
@@ -131,7 +135,13 @@ public class CacheController {
     public boolean containsPersonalDataEntry(Path folderPath) {
         return cache.containsPersonalDataEntry(folderPath);
     }
-
+    private void addLastViewedPath(Path folderPath){
+        bufferedPaths.add(folderPath);
+        if(bufferedPaths.size()>3){
+            bufferedPaths.remove(bufferedPaths.stream().findFirst().get());
+        }
+        System.out.println(bufferedPaths);
+    }
     public Set<Path> getLastViewedPaths() {
         return bufferedPaths;
     }

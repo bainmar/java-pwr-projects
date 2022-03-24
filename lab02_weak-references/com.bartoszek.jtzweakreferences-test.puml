@@ -1,0 +1,31 @@
+@startuml
+class com.bartoszek.jtzweakreferences.PersonalDataSpec {
+- Path folderOnePath
+~ void shouldBePossibleCreateObjectPersonalDataIfPathContainsImageAndRecord()
+}
+class com.bartoszek.jtzweakreferences.CacheControllerSpec {
+- Path folderOnePath
+- Path folderTwoPath
+- Path folderThreePath
+- Path folderFourPath
+- Path folderFifePath
+- Path folderSixPath
+- Path folderSevenPath
+- CacheController cacheController
+~ void init()
+~ void ifCacheContainsPersonalDataEntryCacheControllerShouldReturnTrue()
+~ void ifCacheContainsMoreThanThreeElementsLastAddedEntryShouldBeEligableForGC()
+~ void cacheControllerShouldDisplayCachedPaths()
+}
+class com.bartoszek.jtzweakreferences.CacheSpec {
+- Path folderOnePath
+- Path folderTwoPath
+- PersonalData personalDataEntry
+- PersonalData personalDataEntry2
+- Cache cache
+~ void init()
+~ void cacheShouldContainOneEntryAfterReadPathWithPersonalData()
+~ void cacheShouldRemoveOneEntryFromWeakHashMap()
+~ void cacheShouldRemoveOneEntryFromTwoEntriesInWeakHashMap()
+}
+@enduml

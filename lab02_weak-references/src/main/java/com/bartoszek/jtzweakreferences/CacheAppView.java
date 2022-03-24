@@ -8,12 +8,12 @@ public class CacheAppView extends JFrame {
     private JMenuItem authorJMenuItem;
     private JPanel folderToChooseJPanel;
     private Box personalDataBox;
-    private JTextArea personalDatJTextArea;
+    private JTextArea personalDataJTextArea;
     private JLabel personalDataJLabel;
     private JPanel cachedFilesJPanel;
     private JTextArea cachedFilesJTextArea;
 
-    public CacheAppView(String title){
+    public CacheAppView(String title) {
         super(title);
         initFrame();
     }
@@ -26,8 +26,8 @@ public class CacheAppView extends JFrame {
         return authorJMenuItem;
     }
 
-    public JTextArea getPersonalDatJTextArea() {
-        return personalDatJTextArea;
+    public JTextArea getPersonalDataJTextArea() {
+        return personalDataJTextArea;
     }
 
     public JTextArea getCachedFilesJTextArea() {
@@ -51,18 +51,17 @@ public class CacheAppView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridheight = 2;
-        gbc.weightx = 0.35;
+        gbc.weightx = 0.60;
         gbc.weighty = 0.75;
 
         folderToChooseJPanel = getFolderToChoosePanel();
-        getContentPane().add(folderToChooseJPanel,gbc);
+        getContentPane().add(folderToChooseJPanel, gbc);
 
         //right panel
         gbc.gridx = 1;
-        gbc.weightx = 1;
-        gbc.weightx = 0.65;
+        gbc.weightx = 0.40;
         personalDataBox = getPersonalDataBox();
-        getContentPane().add(personalDataBox,gbc);
+        getContentPane().add(personalDataBox, gbc);
 
         //south panel
         gbc.gridy = 3;
@@ -71,11 +70,11 @@ public class CacheAppView extends JFrame {
         gbc.weightx = 0;
         gbc.weighty = 0.25;
         cachedFilesJPanel = getCachedFilesPanel();
-        getContentPane().add(cachedFilesJPanel,gbc);
+        getContentPane().add(cachedFilesJPanel, gbc);
 
         //frame properties
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(600,500));
+        setPreferredSize(new Dimension(600, 500));
         setLocationRelativeTo(null);
     }
 
@@ -85,8 +84,8 @@ public class CacheAppView extends JFrame {
         panel.setBorder(BorderFactory.createTitledBorder("cache folderów"));
         cachedFilesJTextArea = new JTextArea();
         JScrollPane jScrollPane = new JScrollPane(cachedFilesJTextArea
-                ,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
-                ,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+                , JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
+                , JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         panel.add(jScrollPane);
         return panel;
     }
@@ -95,10 +94,10 @@ public class CacheAppView extends JFrame {
         Box box = Box.createVerticalBox();
         box.setBorder(BorderFactory.createTitledBorder("dane użytkownika"));
         personalDataJLabel = new JLabel();
-        personalDatJTextArea = new JTextArea();
-        JScrollPane jScrollPane = new JScrollPane(personalDatJTextArea
-                ,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
-                ,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        personalDataJTextArea = new JTextArea();
+        JScrollPane jScrollPane = new JScrollPane(personalDataJTextArea
+                , JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
+                , JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         box.add(personalDataJLabel);
         box.add(Box.createVerticalStrut(10));
         box.add(jScrollPane);
@@ -122,12 +121,6 @@ public class CacheAppView extends JFrame {
         authorJMenuItem = new JMenuItem("autor");
         infoJMenu.add(authorJMenuItem);
         return jMenuBar;
-    }
-
-    public static void main(String[] args) {
-        CacheAppView lab2 = new CacheAppView("lab2");
-        lab2.pack();
-        lab2.setVisible(true);
     }
 
 }

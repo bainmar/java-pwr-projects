@@ -1,17 +1,17 @@
 package com.bartoszek.jtzweakreferences;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 import java.util.stream.Collectors;
 
 public class Cache {
+    private WeakHashMap<Path, PersonalData> cacheEntries = new WeakHashMap<>();
 
-    private WeakHashMap<Path,PersonalData> cacheEntries = new WeakHashMap<>();
     public void saveFolder(Path folderPath, PersonalData entry) {
-        cacheEntries.putIfAbsent(folderPath,entry);
+        cacheEntries.putIfAbsent(folderPath, entry);
     }
+
     public int numberOfElements() {
         return cacheEntries.size();
     }
