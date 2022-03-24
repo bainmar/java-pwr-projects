@@ -1,0 +1,5 @@
+pesel 00000000001
+imie Rick
+nazwisko Smith
+wiek 50
+

@@ -1,0 +1,5 @@
+pesel 00000000003
+imie Gonzo
+nazwisko Muppet
+wiek 30
+

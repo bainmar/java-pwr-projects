@@ -1,0 +1,5 @@
+pesel 00000000002
+imie Morty 
+nazwisko Smith
+wiek 18
+

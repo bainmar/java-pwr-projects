@@ -1,0 +1,72 @@
+@startuml
+class com.bartoszek.jtzweakreferences.PersonalData {
+- List<String> recordTxtLines
+- BufferedImage imagePng
++ List<String> getRecordTxtLines()
++ BufferedImage getImagePng()
++ {static} PersonalData createEntry(Path)
+}
+class com.bartoszek.jtzweakreferences.CacheController {
+- Cache cache
+- LinkedHashSet<Path> bufferedPaths
+- CacheAppView cacheAppView
+- JFileChooser jFileChooser
+- Viewer personDataViewer
+- void initView()
++ void initController()
+- void configureJFileChooser()
+- void updatePanelWithPersonalData(PersonalData)
+- void updateCachedFilesJTextArea()
+- void setAuthorListener()
++ boolean saveFolder(Path)
++ int numberOfElements()
++ boolean containsPersonalDataEntry(Path)
+- void addLastViewedPath(Path)
++ Set<Path> getLastViewedPaths()
++ List<String> getCachedPaths()
+}
+class com.bartoszek.jtzweakreferences.SystemTest {
++ {static} void main(String[])
+}
+interface com.bartoszek.jtzweakreferences.Viewer {
+~ Font getFont()
+~ Dimension getImageSize()
+}
+class com.bartoszek.jtzweakreferences.Cache {
+- WeakHashMap<Path,PersonalData> cacheEntries
++ void saveFolder(Path,PersonalData)
++ int numberOfElements()
++ void clearCache()
++ boolean containsPersonalDataEntry(Path)
++ boolean isEmpty()
++ List<String> getCachedPaths()
++ PersonalData getEntry(Path)
+}
+class com.bartoszek.jtzweakreferences.PersonDataViewer {
++ Font getFont()
++ Dimension getImageSize()
+}
+class com.bartoszek.jtzweakreferences.CacheAppView {
+- JMenuItem authorJMenuItem
+- JPanel folderToChooseJPanel
+- Box personalDataBox
+- JTextArea personalDataJTextArea
+- JLabel personalDataJLabel
+- JPanel cachedFilesJPanel
+- JTextArea cachedFilesJTextArea
++ JLabel getPersonalDataJLabel()
++ JMenuItem getAuthorJMenuItem()
++ JTextArea getPersonalDataJTextArea()
++ JTextArea getCachedFilesJTextArea()
++ JPanel getFolderToChooseJPanel()
+- void initFrame()
+- JPanel getCachedFilesPanel()
+- Box getPersonalDataBox()
+- JPanel getFolderToChoosePanel()
+- JMenuBar createJMenuBar()
+}
+
+
+com.bartoszek.jtzweakreferences.Viewer <|.. com.bartoszek.jtzweakreferences.PersonDataViewer
+com.bartoszek.jtzweakreferences.JFrame <|-- com.bartoszek.jtzweakreferences.CacheAppView
+@enduml

@@ -1,0 +1,5 @@
+pesel 00000000004
+imie Papa
+nazwisko Smerf
+wiek 70
+
