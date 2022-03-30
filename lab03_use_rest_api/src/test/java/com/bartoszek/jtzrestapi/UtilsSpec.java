@@ -11,10 +11,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+@Disabled
 public class UtilsSpec {
-    @Disabled
     @Test
-    void getAllCountriesFormattedEN() throws IOException {
+    void getAllCountriesFormattedENFromFile() throws IOException {
         String fileWithCountries = Files.readString(Paths.get("src/test/resources/countriesFromGeoDB.txt"));
         Pattern pattern = Pattern.compile(",\\s");
         Matcher matcher = pattern.matcher(fileWithCountries);
@@ -30,9 +30,9 @@ public class UtilsSpec {
                 }, StringBuilder::append);
         System.out.println(collect.toString());
     }
-    @Disabled
+
     @Test
-    void getAllCountriesFormattedPL() throws IOException {
+    void getAllCountriesFormattedPLFromFile() throws IOException {
         List<String> strings = Files.readAllLines(Paths.get("src/test/resources/countriesFromPanstwaCom.txt"));
         StringBuilder collectedData = strings.stream().collect(StringBuilder::new, (b, e) -> {
             b.append("\"");
@@ -41,5 +41,20 @@ public class UtilsSpec {
             b.append(",");
         }, StringBuilder::append);
         System.out.println(collectedData);
+    }
+
+    @Test
+    void getAllCurrenciesFormattedFromFile() throws IOException {
+        Stream<String> lines = Files.lines(Paths.get("src/test/resources/currenciesFromGeoDB.txt"));
+        StringBuilder collect = lines.flatMap(str -> Stream.of(str.split(",")))
+                .map(String::trim)
+                .collect(StringBuilder::new,
+                        (b, e) -> {
+                            b.append("\"");
+                            b.append(e);
+                            b.append("\"");
+                            b.append(",");
+                        }, StringBuilder::append);
+        System.out.println(collect);
     }
 }

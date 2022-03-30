@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+@Disabled
 public class GeoDbClientApiSpec {
     private static GeoDbClientApi geoDbClientApi;
 
@@ -20,13 +21,11 @@ public class GeoDbClientApiSpec {
         geoDbClientApi = new GeoDbClientApi();
     }
 
-    @Disabled
     @Test
     void GeoDbClientShouldGetAllCountries() throws IOException, InterruptedException {
         List<String> allCountries = geoDbClientApi.getAllCountries(LanguageCode.EN);
         System.out.println(allCountries);
     }
-    @Disabled
     @Test
     void GeoDBClientShouldGetAllCurrenciesForGivenCountry() throws IOException, InterruptedException {
         List<String> currenciesForAllCountries = geoDbClientApi.getCurrenciesForAllCountries();
