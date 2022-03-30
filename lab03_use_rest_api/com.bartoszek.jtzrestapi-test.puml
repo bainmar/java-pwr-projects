@@ -1,0 +1,13 @@
+@startuml
+class com.bartoszek.jtzrestapi.UtilsSpec {
+~ void getAllCountriesFormattedENFromFile()
+~ void getAllCountriesFormattedPLFromFile()
+~ void getAllCurrenciesFormattedFromFile()
+}
+class com.bartoszek.jtzrestapi.GeoDbClientApiSpec {
+- {static} GeoDbClientApi geoDbClientApi
+~ {static} void init()
+~ void GeoDbClientShouldGetAllCountries()
+~ void GeoDBClientShouldGetAllCurrenciesForGivenCountry()
+}
+@enduml
