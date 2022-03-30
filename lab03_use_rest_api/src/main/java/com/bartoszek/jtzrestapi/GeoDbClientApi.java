@@ -39,7 +39,7 @@ public class GeoDbClientApi {
     }
 
     public String getCountryWikiData(String countryName) throws IOException, InterruptedException {
-        setResponseFromCountriesEndpointWithOffsetAndLanguageCode(0, LanguageCode.EN);
+        setResponseFromCountriesEndpointWithCountryName(countryName);
         Countries countries = mapper.readValue(response.body(), Countries.class);
         return countries.getData().get(0).getWikiDataId();
     }

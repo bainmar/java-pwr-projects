@@ -7,6 +7,8 @@ public class SystemTest {
 
 		EventQueue.invokeLater(()->{
 			AppView appView = new AppView("use-client-api");
+			AppController appController = new AppController(appView);
+			appController.initController();
 			appView.pack();
 			appView.setVisible(true);
 		});
