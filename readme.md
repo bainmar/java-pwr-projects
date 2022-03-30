@@ -5,6 +5,7 @@
 - [Zadania do wykonania](#zadania-do-wykonania)
   - [Lab01 (modules, jlink)](#lab01-modules-jlink)
   - [Lab02 (weak references)](#lab02-weak-references)
+  - [Lab03 (client api)](#lab03-client-api)
 
 ## Autor
 
@@ -36,7 +37,7 @@ założenia:
 - program w stylu funkcjonalnym
 - dodać menadzer bezpieczeństwa i skorzystać z pliku polityki
 
-[szczegółowa dokumentacja wykonanego zadania (readme.md)](lab01_modules_jlink/readme.md)
+[dokumentacja wykonanego zadania (readme.md)](lab01_modules_jlink/readme.md)
 
 ### Lab02 (weak references)
 
@@ -55,4 +56,23 @@ Należy też przetestować możliwość regulowania zachowania się algorytmu od
 
 Architektura aplikacji powinna umożliwiać dołączanie różnych podglądaczy zawartości (czyli klas odpowiedzialnych za renderowanie zawartości plików z danymi), przy czym podglądacze powinny być konfigurowalne (np. poprzez określenie sposobu renderowania czcionek czy obrazków).
 
-[szczegółowa dokumentacja wykonanego zadania (readme.md)](lab02_weak-references//readme.md)
+[dokumentacja wykonanego zadania (readme.md)](lab02_weak-references//readme.md)
+
+### Lab03 (client api)
+
+Napisz aplikację, która pozwoli skonsumować dane pozyskiwane z serwisu oferującego publiczne restowe API. Ciekawą listę serwisów można znaleźć pod adresem:
+```https://rapidapi.com/collection/list-of-free-apis```
+Na tej liście jest GeoDB Cities API (```https://rapidapi.com/wirefreethought/api/geodb-cities?endpoint=59908d68e4b075a0d1d6d9ac```). I niech to API posłuży do realizacji ćwiczenia.
+
+Projektowana aplikacja niech służy do testów z wiedzy z geograficznej. Zapytania i odpowiedzi powinny być wyświetlane na graficznym interfejsie, który umożliwi zmianę ustawień językowych (lokalizacji). Wspierane mają być język polski i język angielski. Implementacja opierać się ma na tzw. bundlach (plikach zawierających klucze i wartości) i z wykorzystaniem klas z pakietów ```java.text, java.util```.
+
+Wystarczy zaimplementować kilka przykładowych pytań, np. "Ile miast w kraju .... ma liczbę mieszkańców większą niż ....". 
+Niech użytkownik ma możliwość parametryzowania tych zapytania (w miejsce kropek niech wpisywane będą wartości z list wyboru - jeśli da się je pozyskać z serwisu, lub niech będą to wartości wprowadzone wolnym tekstem) oraz zadeklarowanie odpowiedzi.
+
+Niech system sprawdza odpowiedzi wprowadzone przez użytkownika oraz prezentuje poprawne odpowiedzi. Odpowiedź poprawne mogą przyjąć postać, np.:
+"W kraju .... istnieją 3 takie miasta", "W kraju .... istnieje 5 takich miast".
+Niech w tych odpowiedziach obsłużona będzie odmiana przez liczny. Generalnie chodzi o przetestowanie wariantowego pobierania tekstów z bundli. Do tego przyda się klasa ```ChoiceFormat```. 
+
+Proszę zauważyć, że w ```API``` serwisu jednym z parametrów metod jest ```languageCode```.
+
+[dokumentacja wykonanego zadania (readme.md)](lab03_use_rest_api/readme.md)

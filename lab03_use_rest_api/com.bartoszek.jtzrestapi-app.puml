@@ -1,0 +1,83 @@
+@startuml
+class com.bartoszek.jtzrestapi.AppView {
+- JMenu infoJMenu
+- JMenuItem authorJMenuItem
+- ResourceBundle resourceBundle
+- JPanel allQuestionsJPanel
+- JPanel questionOneJPanel
+- JLabel qOneQuestionJLabel
+- JComboBox<String> qOneJComboBox
+- JLabel qOneQuestionTwoJLabel
+- JTextField qOneQuestionJTextField
+- JLabel qOneAnswerJLabel
+- JTextField qOneAnswerJTextField
+- JButton qOneJButton
+- JPanel questionTwoJPanel
+- JLabel qTwoQuestionJLabel
+- JComboBox<String> qTwoJComboBox
+- JLabel qTwoAnswerJLabel
+- JComboBox<String> qTwoAnswerJComboBox
+- JButton qTwoJButton
+- JLabel languageJLabel
+- JComboBox<String> languageJComboBox
++ JButton getqOneJButton()
++ JComboBox<String> getqOneJComboBox()
++ JTextField getqOneQuestionJTextField()
++ JTextField getqOneAnswerJTextField()
++ ResourceBundle getResourceBundle()
++ JComboBox<String> getqTwoJComboBox()
++ JComboBox<String> getqTwoAnswerJComboBox()
++ JButton getqTwoJButton()
+- void initFrame()
+- JPanel configureLanguageJPanel()
+- JPanel configureQuestionTwoJPanel()
++ void updateLanguage(Locale)
+- JPanel configureQuestionOneJPanel()
+- JMenuBar createJMenuBar()
+}
+class com.bartoszek.jtzrestapi.GeoDbClientApi {
+- String x_rapidapi_key
+- String x_rapidapi_host
+- String host
+- String countriesEndpoint
+- String countriesDetailsEndpoint
+- String citiesEndpoint
+- String currenciesEndpoint
+- {static} int NUMBER_OF_RESULTS
+- HttpRequest request
+- HttpResponse<String> response
+- HttpClient client
+- ObjectMapper mapper
++ String getCountryWikiData(String)
++ int getCitiesCountForCountry(String,int)
++ List<String> getCurrencyCodesForCountry(String)
++ List<String> getCurrenciesForAllCountries()
++ String getCountryCapital(String)
++ List<String> getAllCountries(LanguageCode)
+- void setResponseFromCountriesEndpointWithOffsetAndLanguageCode(int,LanguageCode)
+- void setResponseFromCurrenciesEndpointWithOffset(int)
+- void setResponseFromCountriesDetailsEndpointWithCountryId(String)
+- void setResponseFromCitiesEndpointWithWikiDataIdAndMinPopulation(String,int)
+- void setResponseFromCountriesEndpointWithCountryName(String)
+- void setRequest(URI)
+}
+class com.bartoszek.jtzrestapi.AppController {
+- AppView appView
+- GeoDbClientApi geoDbClientApi
++ void initController()
+- void configureQuestionOne()
+- void configureQuestionTwo()
+}
+class com.bartoszek.jtzrestapi.SystemTest {
++ {static} void main(String[])
+}
+class com.bartoszek.jtzrestapi.Utils {
++ {static} String[] COUNTRIES_EN
++ {static} String[] COUNTRIES_PL
++ {static} String[] CURRENCIES
++ {static} String[] LANGUAGES
+}
+
+
+com.bartoszek.jtzrestapi.JFrame <|-- com.bartoszek.jtzrestapi.AppView
+@enduml
