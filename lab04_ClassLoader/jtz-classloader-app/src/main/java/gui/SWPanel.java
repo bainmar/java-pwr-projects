@@ -1,4 +1,4 @@
-package com.bartoszek.gui;
+package gui;
 
 import java.awt.Font;
 
@@ -9,8 +9,8 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpringLayout;
 
-import processing.Status;
-import processing.StatusListener;
+import processing.processing.Status;
+import processing.processing.StatusListener;
 
 public class SWPanel extends JPanel {
 	JLabel instructionSW;
@@ -27,7 +27,7 @@ public class SWPanel extends JPanel {
 		textAreaSW.setFont(new Font("Times New Roman", Font.ITALIC + Font.BOLD, 16));
 		jScrollSW = (JScrollPane) add(new JScrollPane(textAreaSW, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
-		
+
 
 		layoutSW.putConstraint(SpringLayout.NORTH, instructionSW, 5, SpringLayout.NORTH, this);
 		layoutSW.putConstraint(SpringLayout.WEST, instructionSW, 5, SpringLayout.WEST, this);
@@ -38,14 +38,14 @@ public class SWPanel extends JPanel {
 		layoutSW.putConstraint(SpringLayout.EAST, jScrollSW, 0, SpringLayout.EAST, instructionSW);
 
 	}
-	
+
 	public class SWPanelListener implements StatusListener{
 
 		@Override
 		public void statusChanged(Status s) {
-			textAreaSW.append(s.getTaskName());			
+			//textAreaSW.append(s.getTaskName());
 		}
-		
+
 	}
-	
+
 }

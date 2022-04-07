@@ -1,4 +1,4 @@
-package com.bartoszek.classes;
+package com.bartoszek.jtzclassloaderlibrary;
 
 import processing.Processor;
 import processing.Status;
@@ -13,16 +13,14 @@ public class RemoveWhiteSpaces implements Processor {
 		if(task==null){
 			return false;
 		}
-		Status status = new Status("Przygotowanie....tekst: " + task, 0);
+		Status status = new Status(0, 0);
 		sl.statusChanged(status);
 		try {
 			Thread.sleep(1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		status.setTaskName("\nPrzetwarzanie..");
 		for (int i = 0; i <= 100; i += 20) {
-			status.setProgress(i);
 			sl.statusChanged(status);
 			try {
 				Thread.sleep(500);
@@ -31,9 +29,7 @@ public class RemoveWhiteSpaces implements Processor {
 			}
 		}
 		result = task.replaceAll("\\s+","");
-		status.setTaskName("\nZakończono!\n");
 		sl.statusChanged(status);
-		status.setTaskName(result);
 		sl.statusChanged(status);
 		return true;
 	}

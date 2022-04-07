@@ -1,7 +1,5 @@
-package com.bartoszek.gui;
+package gui;
 
-import java.awt.Checkbox;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -13,13 +11,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SpringLayout;
 
-import com.bartoszek.ClassHandler;
+import com.bartoszek.jtzclassloaderapp.ClassHandler;
 
 public class NEPanel extends JPanel {
 	JLabel pathLabelNE;

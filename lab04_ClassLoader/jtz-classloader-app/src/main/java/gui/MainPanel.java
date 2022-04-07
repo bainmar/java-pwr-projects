@@ -1,9 +1,8 @@
-package com.bartoszek.gui;
+package gui;
 
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class MainPanel extends JPanel {

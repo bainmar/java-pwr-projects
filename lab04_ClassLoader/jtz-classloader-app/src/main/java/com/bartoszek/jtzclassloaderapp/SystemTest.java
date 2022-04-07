@@ -1,11 +1,11 @@
-package com.bartoszek;
+package com.bartoszek.jtzclassloaderapp;
 
 import java.awt.EventQueue;
 import java.io.IOException;
 
 import javax.swing.JFrame;
 
-import com.bartoszek.gui.MyFrame;
+import gui.MyFrame;
 
 public class SystemTest {
 

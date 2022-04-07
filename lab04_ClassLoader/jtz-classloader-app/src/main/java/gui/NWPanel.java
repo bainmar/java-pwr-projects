@@ -1,4 +1,4 @@
-package com.bartoszek.gui;
+package gui;
 
 import java.awt.Font;
 
