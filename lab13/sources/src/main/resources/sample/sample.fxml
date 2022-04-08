@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+
+    <VBox fx:id="vbox" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="400.0" spacing="10"
+          xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1">
+    <?compile false?>
+        <fx:script>
+            var System = Java.type('java.lang.System');
+            var String = Java.type('java.lang.String');
+            var List = Java.type('java.util.List');
+            var Files = Java.type('java.nio.file.Files');
+            var Paths = Java.type('java.nio.file.Paths');
+            var ArrayList = Java.type("java.util.ArrayList");
+            var Random = Java.type("java.util.Random");
+
+
+            var sufixList = new ArrayList();
+            var random = new Random();
+            sufixList.add("1.txt");
+            sufixList.add("2.txt");
+            sufixList.add("3.txt");
+            sufixList.add("4.txt");
+            var prefixList = new ArrayList();
+            prefixList.add("s_");
+            prefixList.add("m_");
+            prefixList.add("d_");
+
+            function buttonAction(event) {
+                if ((nameText.getText()) != "") {
+                    if (radioButton.isSelected()) {
+                        var pre = random.nextInt(3);
+                        var suf = random.nextInt(4);
+
+                        var path = "textFiles/" + prefixList.get(pre) + sufixList.get(suf);
+                        var text = Files.readAllLines(Paths.get(path));
+                        textArea.setText(text + "\n" + nameText.getText());
+
+
+                    } else if (radioButton2.isSelected()) {
+                        if (radioButton5.isSelected()) {
+                            var text = Files.readAllLines(Paths.get("textFiles/m_1.txt"));
+                            textArea.setText(text + "\n" + nameText.getText());
+
+                        } else if (radioButton6.isSelected()) {
+                            var text = Files.readAllLines(Paths.get("textFiles/m_2.txt"));
+                            textArea.setText(text + "\n" + nameText.getText());
+                        } else if (radioButton7.isSelected()) {
+                            var text = Files.readAllLines(Paths.get("textFiles/m_3.txt"));
+                            textArea.setText(text + "\n" + nameText.getText());
+                        } else if (radioButton8.isSelected()) {
+                            var text = Files.readAllLines(Paths.get("textFiles/m_4.txt"));
+                            textArea.setText(text + "\n" + nameText.getText());
+                        } else {
+                            textArea.setText("Proszę wybrać szablon.");
+                        }
+
+                    } else if (radioButton3.isSelected()) {
+                        if (radioButton5.isSelected()) {
+                            var text = Files.readAllLines(Paths.get("textFiles/d_1.txt"));
+                            textArea.setText(text + "\n" + nameText.getText());
+
+                        } else if (radioButton6.isSelected()) {
+                            var text = Files.readAllLines(Paths.get("textFiles/d_2.txt"));
+                            textArea.setText(text + "\n" + nameText.getText());
+                        } else if (radioButton7.isSelected()) {
+                            var text = Files.readAllLines(Paths.get("textFiles/d_3.txt"));
+                            textArea.setText(text + "\n" + nameText.getText());
+                        } else if (radioButton8.isSelected()) {
+                            var text = Files.readAllLines(Paths.get("textFiles/d_4.txt"));
+                            textArea.setText(text + "\n" + nameText.getText());
+                        } else {
+                            textArea.setText("Proszę wybrać szablon.");
+                        }
+
+                    } else if (radioButton4.isSelected()) {
+                        if (radioButton5.isSelected()) {
+                            var text = Files.readAllLines(Paths.get("textFiles/s_1.txt"));
+                            textArea.setText(text + "\n" + nameText.getText());
+
+                        } else if (radioButton6.isSelected()) {
+                            var text = Files.readAllLines(Paths.get("textFiles/s_2.txt"));
+                            textArea.setText(text + "\n" + nameText.getText());
+                        } else if (radioButton7.isSelected()) {
+                            var text = Files.readAllLines(Paths.get("textFiles/s_3.txt"));
+                            textArea.setText(text + "\n" + nameText.getText());
+                        } else if (radioButton8.isSelected()) {
+                            var text = Files.readAllLines(Paths.get("textFiles/s_4.txt"));
+                            textArea.setText(text + "\n" + nameText.getText());
+                        } else {
+                            textArea.setText("Proszę wybrać szablon.");
+                        }
+                    } else {
+                        textArea.setText("Wybierz rodzaj życzeń.")
+                    }
+                } else {
+                    textArea.setText("Podaj imie.");
+                }
+            }
+        </fx:script>
+    <?compile true?>
+
+        <children>
+            <Label fx:id="inputLbl" alignment="CENTER_LEFT" cache="true" cacheHint="SCALE" prefHeight="30.0"
+                   prefWidth="200.0" text="Imie:" textAlignment="LEFT"/>
+            <TextField fx:id="nameText" prefWidth="100.0"/>
+            <Label text="Strategia:"/>
+            <HBox>
+                <RadioButton fx:id="radioButton" text="losowo">
+                    <HBox.margin>
+                        <Insets right="3.0"/>
+                    </HBox.margin>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="group"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="radioButton2" text="kolejne">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                        <Insets bottom="10.0"/>
+                    </HBox.margin>
+                    <toggleGroup>
+                        <fx:reference source="group"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="radioButton3" text="najdłuższe">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                        <Insets bottom="10.0"/>
+                    </HBox.margin>
+                    <toggleGroup>
+                        <fx:reference source="group"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="radioButton4" text="najkrótsze">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                        <Insets bottom="10.0"/>
+                    </HBox.margin>
+                    <toggleGroup>
+                        <fx:reference source="group"/>
+                    </toggleGroup>
+                </RadioButton>
+            </HBox>
+            <Label text="Szablon:"/>
+            <HBox>
+                <RadioButton fx:id="radioButton5" text="I">
+                    <HBox.margin>
+                        <Insets right="3.0"/>
+                    </HBox.margin>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="group2"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="radioButton6" text="II">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                        <Insets bottom="10.0"/>
+                    </HBox.margin>
+                    <toggleGroup>
+                        <fx:reference source="group2"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="radioButton7" text="III">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                        <Insets bottom="10.0"/>
+                    </HBox.margin>
+                    <toggleGroup>
+                        <fx:reference source="group2"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="radioButton8" text="IV">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                        <Insets bottom="10.0"/>
+                    </HBox.margin>
+                    <toggleGroup>
+                        <fx:reference source="group2"/>
+                    </toggleGroup>
+                </RadioButton>
+            </HBox>
+
+            <TextArea fx:id="textArea" prefWidth="50.0" wrapText="true" text="click ok...."/>
+
+            <Button fx:id="button" text="Ok" onAction="buttonAction(event);"/>
+
+
+        </children>
+    </VBox>
+
