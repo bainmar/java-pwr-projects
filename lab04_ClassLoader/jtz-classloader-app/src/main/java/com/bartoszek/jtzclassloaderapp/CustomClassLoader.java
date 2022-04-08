@@ -10,6 +10,8 @@ public class CustomClassLoader extends ClassLoader {
     private Path searchPath;
 
     public CustomClassLoader(Path searchPath) {
+        System.out.println(searchPath);
+        System.out.println(System.getProperty("user.dir"));
         if (!Files.isDirectory(searchPath)) throw new IllegalArgumentException("Path must be a directory");
         this.searchPath = searchPath;
     }
